@@ -16,12 +16,14 @@ const MessageSchema = Schema({
     required: true
   }
 
+}, {
+  timeStamps: true,
 })
 
 MessageSchema.method('toJSON', function () {
-  const { __v, _id, password, ...object } = this.toObject()
+  const { __v, ...object } = this.toObject()
   object.uid = _id
   return object
 })
 
-module.exports = model('User', UserSchema)
+module.exports = model('Message', MessageSchema)
