@@ -4,12 +4,12 @@ const MessageSchema = Schema({
   from: {
     type: Schema.Types.ObjectId,
     ref: 'User',
-    required: true,
+    required: true
   },
   to: {
     type: Schema.Types.ObjectId,
     ref: 'User',
-    required: true,
+    required: true
   },
   message: {
     type: String,
@@ -17,7 +17,7 @@ const MessageSchema = Schema({
   }
 
 }, {
-  timeStamps: true,
+  timeStamps: true
 })
 
 MessageSchema.method('toJSON', function () {

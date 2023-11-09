@@ -1,33 +1,30 @@
-
 /**
- * @api {post} /auth/login Login
+ * path: api/login
  */
 
-const { Router } = require('express');
+const { Router } = require('express')
+const { createUser, renewToken, login } = require('../controllers/auth')
+const { check } = require('express-validator')
+const { validateFields } = require('../middlewares/validate-fields')
 
-const router = Router();
+const router = Router()
 
 // Create new users:
-router.post('/new', (req, res) => {
-  res.json({
-    ok: true,
-    msg: 'Register'
-  })
-})
+router.post('/new', [
+  check('name', 'Name is required').not().isEmpty(),
+  check('email', 'Email is required').isEmail(),
+  check('password', 'Password is required').not().isEmpty(),
+  validateFields
+], createUser)
 
 // Login:
-router.post('/', (req, res) => {
-  res.json({
-    ok: true,
-    msg: 'Login'
-  })
-})
+router.post('/', [
+  check('email', 'Email is required').isEmail(),
+  check('password', 'Password is required').not().isEmpty(),
+  validateFields
+], login)
 
-router.get('/renew', (req, res) => {
-  res.json({
-    ok: true,
-    msg: 'Renew'
-  })
-})
+// Renew token:
+router.get('/renew', renewToken)
 
-module.exports = router;
+module.exports = router

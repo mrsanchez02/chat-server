@@ -1,3 +1,5 @@
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+
 # Socket Server
 
 Este backend contiene todo lo necesario para configurar un servidor de express + socket.io.
